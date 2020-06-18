@@ -1,0 +1,39 @@
+#Clients services
+
+channel-Service-Url : Media-stream-channel
+user-Service-Url : Media-stream-User
+upload.video : http://172.19.140.26:5000/convertVideo
+detect.Video : http://172.19.140.26:5000/detectVideoObjects
+jwt.http.request.header : Authorization
+
+
+############################## 
+#Database connection config
+##############################
+server:
+  port: 8081
+spring:
+  application:
+    name: Media-stream-Video
+  datasource:
+    url: jdbc:mysql://localhost/videoservicedb
+    username: admin
+    password: 123
+    driverClassName: com.mysql.cj.jdbc.Driver
+    
+##############################  
+  #Hibernate config
+##############################  
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect    
+    
+    
+    

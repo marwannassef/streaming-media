@@ -1,0 +1,36 @@
+jwt.signing.key.secret : mySecret
+jwt.get.token.uri : /authenticate
+jwt.refresh.token.uri : /refresh
+jwt.http.request.header : Authorization
+jwt.token.expiration.in.seconds : 60000
+channel-Service-Url : Media-stream-channel
+############################## 
+#Database connection config
+##############################
+server:
+  port: 8082
+spring:
+  application:
+    name: Media-stream-User
+  datasource:
+    url: jdbc:mysql://localhost/userservicedb
+    username: admin
+    password: 123
+    driverClassName: com.mysql.cj.jdbc.Driver
+    
+##############################  
+  #Hibernate config
+##############################  
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      ddl-auto:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect    
+    
+    
+    

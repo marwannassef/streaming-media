@@ -1,0 +1,44 @@
+#Clients services
+
+user-Service-Url : Media-stream-User
+video-Service-Url : MEDIA-STREAM-VIDEO
+jwt.http.request.header : Authorization
+
+#Eureka configuration
+##############################
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+ 
+############################## 
+#Database connection config
+##############################
+server:
+  port: 8083
+spring:    
+  application:
+    name: Media-stream-channel
+  datasource:
+    url: jdbc:mysql://localhost/channeldb?serverTimezone=America/Chicago
+    username: admin
+    password: 123
+    driverClassName: com.mysql.cj.jdbc.Driver
+  #  data: classpath:/data.sql
+  #  initialization-mode: always
+  
+##############################  
+  #Hibernate config
+##############################  
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
