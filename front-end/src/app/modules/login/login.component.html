@@ -1,0 +1,21 @@
+<app-header [dispButton]=true (onButtonClick)='onRegisterClick()' dispButtonImg=person_add></app-header>
+<div style="height: 100%;">
+    <div class="col-lg-5 center" align="center" style="top: 100px;">
+        <mat-card class="example-card" style="width: 400px;">
+            <img mat-card-image src="assets/logo.png" alt="Photo of a Shiba Inu" style="width: 200px;">
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Username</mat-label>
+                <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email"
+                    [(ngModel)]="user.email">
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="password" [(ngModel)]="user.password">
+            </mat-form-field>
+            <br />
+            <button mat-raised-button color="primary" (click)="onLoginClick()">Login</button>
+        </mat-card>
+    </div>
+</div>

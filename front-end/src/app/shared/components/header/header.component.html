@@ -1,0 +1,25 @@
+<div class="backgroundClass" style="margin-bottom: 15px;">
+  <img src="assets/logo.png" style="padding-left: 30px; height: 60px; cursor: pointer;" (click)="onLogoClick()">
+  <mat-form-field appearance="standard" style="left: 25%; width: 50%;">
+    <mat-label>Search Video</mat-label>
+    <input matInput placeholder="Write Video Name">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <div style="position: absolute; right: 1px;">
+    <img mat-card-avatar [src]="channelLogo" alt="Avatar" [matMenuTriggerFor]="menu" id="img"
+      class="img-class" (error)="this.channelLogo='https://www.w3schools.com/howto/img_avatar.png';">
+    <mat-menu #menu="matMenu">
+      <label style="text-align: center; display: block; margin: 5px;" *ngIf="contextService.isLoggedIn()">
+        Welcome {{contextService.getUserName()}}!!
+      </label>
+      <label style="text-align: center; display: block; margin: 5px;" *ngIf="contextService.isLoggedOut()">
+        Welcome Guest!!
+      </label>
+      <button mat-menu-item (click)="onMyChannelClick()" *ngIf="contextService.isLoggedIn()">Your Channel</button>
+      <button mat-menu-item (click)="onDashboardClick()" *ngIf="contextService.isAdmin()">Dashboard</button>
+      <button mat-menu-item (click)="onLoginClick()" *ngIf="contextService.isLoggedOut()">Login</button>
+      <button mat-menu-item (click)="onSignupClick()" *ngIf="contextService.isLoggedOut()">Signup</button>
+      <button mat-menu-item (click)="onLogoutClick()" *ngIf="contextService.isLoggedIn()">Logout</button>
+    </mat-menu>
+  </div>
+</div>

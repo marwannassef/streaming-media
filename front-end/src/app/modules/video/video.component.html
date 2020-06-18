@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div style="width: 70%; height: 100px; float: left; margin-left: 15px;">
+    <video id="my-video" class="video-js vjs-default-button vjs-big-play-centered" controls playsinline preload="auto"
+        width="940" height="480" data-setup="{}">
+        <source id="srcs" src="{{this.url}}" type="application/x-mpegURL" />
+    </video>
+    <h3 style="margin-bottom: 0;">{{video.videoTitle}}</h3>
+    <div style="display: flex; align-items: center; align-content: center;">
+        <p>{{video.numOfViews}} Views, {{video.numOfLikes}} Likes</p>
+        <div style=" right: 40%; position: absolute;" *ngIf="contextService.isLoggedIn()">
+            <mat-icon [matBadge]="video.numOfLikes" style="cursor: pointer;" (click)="onLikeClick()"
+                [ngClass]="{'likeClass': video.liked, 'unlikeClass': !video.liked}">
+                favorite
+            </mat-icon>
+        </div>
+    </div>
+    <mat-divider style="width: 90%;"></mat-divider>
+    <br>
+    <div style="display: flex;">
+        <img mat-card-avatar class="example-header-image" [src]="channelLogo"
+            (error)="this.channelLogo='https://www.w3schools.com/howto/img_avatar.png';" alt="Avatar"
+            (click)="onChannelClick(video.channel.id)">
+        <h3 style="margin-left: 10px;">{{video.channel.channelName}}</h3>
+        <button mat-raised-button color="primary" (click)="onUnsubscribeClick()" *ngIf="video.channel.isSubscribed && contextService.isLoggedIn()"
+            style="right: 40%; position: absolute;">Unsubscribe</button>
+        <button mat-raised-button color="primary" (click)="onSubscribeClick()" *ngIf="!video.channel.isSubscribed && contextService.isLoggedIn()"
+            style="right: 40%; position: absolute;">Subscribe</button>
+    </div>
+    <mat-divider style="width: 90%;"></mat-divider>
+    <div style="display: flex; align-items: center; align-content: center;" *ngIf="contextService.isLoggedIn()">
+        <mat-form-field style="width: 70%;">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..." name="comment" [(ngModel)]="comment"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="onCommentClick()"
+            style="right: 40%; position: absolute;">Comment</button>
+    </div>
+    <div *ngFor="let comment of video.comments" style="width: 80%;">
+        <mat-card class="example-card" style="padding-bottom: 0;">
+            <mat-card-header>
+                <img mat-card-avatar class="example-header-image"
+                    [src]="'https://streaming-video-storage.s3.amazonaws.com/photos/' + comment.channelImg"
+                    (error)="comment.channelImg='img_avatar.png';" alt="Avatar"
+                    (click)="onChannelClick(comment.channelId)">
+                <mat-card-title>{{comment.username}}</mat-card-title>
+                <mat-card-subtitle style="width: 80%;; word-wrap: break-word;">
+                    {{comment.text}}
+                </mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+        <br>
+    </div>
+</div>
+<div style="margin-left: 70%; height: 100px;">
+    <h2>Recommended Videos</h2>
+    <div *ngFor="let recVideo of video.recommendedVideos" style="width: 80%;">
+        <app-video-card [video]=recVideo (videoEventEmitter)='onVideoClick(recVideo.id)'
+            (channelEventEmitter)='onChannelClick(recVideo.channel.id)'></app-video-card>
+        <br>
+    </div>
+</div>

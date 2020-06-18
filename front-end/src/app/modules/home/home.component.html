@@ -1,0 +1,8 @@
+<app-header [dispButton]=true dispButtonImg=person_add></app-header>
+
+<mat-grid-list cols="4">
+        <mat-grid-tile *ngFor="let video of videos">
+                <app-video-card [video]=video (videoEventEmitter)='onVideoClick(video.id)'
+                        (channelEventEmitter)='onChannelClick(video.channel.id)'></app-video-card>
+        </mat-grid-tile>
+</mat-grid-list>

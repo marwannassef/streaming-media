@@ -1,0 +1,52 @@
+<app-header></app-header>
+<div style="height: 100%;">
+    <div class="col-lg-5 center" align="center" style="top: 100px;">
+        <mat-card class="example-card" style="width: 400px;">
+            <mat-label>Signup</mat-label>
+            <br />
+            <br />
+            <mat-form-field appearance="outline">
+                <mat-label>Full Name</mat-label>
+                <input matInput type="text" size="20" name="fullName" [(ngModel)]="user.fullName"
+                    placeholder="Channel Name" required>
+                <button mat-icon-button matSuffix disabled [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword">
+                    <mat-icon></mat-icon>
+                </button>
+            </mat-form-field>
+            <br />
+            <br />
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email"
+                    [(ngModel)]="user.email" placeholder="username@example.com" required>
+                <button mat-icon-button matSuffix disabled [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidePassword">
+                    <mat-icon></mat-icon>
+                </button>
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" [(ngModel)]="user.password"
+                    required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" autocomplete="new-password">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <br />
+            <mat-form-field appearance="outline">
+                <mat-label>Re-Enter Password</mat-label>
+                <input matInput [type]="hidePasswordVarify ? 'password' : 'text'" name="reEnterPassword"
+                    [(ngModel)]="user.passwordVarify" required autocomplete="new-password">
+                <button mat-icon-button matSuffix (click)="hidePasswordVarify = !hidePasswordVarify"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePasswordVarify">
+                    <mat-icon>{{hidePasswordVarify ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <br />
+            <button mat-raised-button color="primary" (click)="onSignupClick()">Signup</button>
+        </mat-card>
+    </div>
+</div>

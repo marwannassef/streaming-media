@@ -1,0 +1,20 @@
+<mat-card class="example-card" style="padding-bottom: 0;" style="width: 300px;">
+        <mat-card-header>
+                <img mat-card-avatar class="example-header-image" *ngIf="showChannelLogo" [src]="channelLogo"
+                        (error)="this.channelLogo='https://www.w3schools.com/howto/img_avatar.png';"
+                        alt="Avatar" (click)="onChannelClick(video.channel.id)">
+                <mat-card-title>{{video.videoTitle}}</mat-card-title>
+                <mat-card-subtitle *ngIf="showChannelLogo">
+                        {{video.channel.channelName}}
+                        <br>
+                        {{video.numOfViews}} Views, {{video.numOfLikes}} Likes
+                </mat-card-subtitle>
+                <mat-card-subtitle *ngIf="!showChannelLogo">
+                        {{video.numOfViews}} Views, {{video.numOfLikes}} Likes
+                </mat-card-subtitle>
+        </mat-card-header>
+        <video class="img-responsive" mat-card-image style="cursor: pointer;" (mouseover)="play()" (mouseout)="pause()"
+                [id]="video.id" (click)="onVideoClick(video.id)" loop muted #videoPlayer>
+                <source [src]="videoSrc" type="video/mp4">
+        </video>
+</mat-card>

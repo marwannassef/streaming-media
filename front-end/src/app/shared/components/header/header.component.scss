@@ -1,0 +1,30 @@
+@mixin header-theme($theme) {
+    $primary: map-get($theme, primary);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+  
+    .backgroundClass {
+        height: 60px;
+        background-color: mat-color($primary, darker);
+        color: mat-color($primary, default-contrast);
+        display: flex !important;
+        align-content: center !important;
+        align-items: center !important;
+    }
+  }
+  
+  .img-class {
+    -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    margin-right: 25px;
+}
+
+.img-class:hover {
+  cursor: pointer;
+}
+
+.example-header-image {
+  background-size: cover;
+}
